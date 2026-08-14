@@ -1,5 +1,11 @@
 package org.example;
+
 import java.time.LocalDate;
+
+/**
+ *
+ * @author Guilherme Lima Conte
+ */
 
 public class Tarefa {
     public enum TarefaStatus {

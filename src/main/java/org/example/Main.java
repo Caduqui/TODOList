@@ -5,6 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
 
+/**
+ *
+ * @author Guilherme Lima Conte
+ */
+
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final ConfigTarefas configTarefas = new ConfigTarefas();
@@ -17,7 +22,7 @@ public class Main {
             System.out.println("1- Adicionar tarefa");
             System.out.println("2- Inspecionar tarefas");
             System.out.println("3- Remover tarefa");
-            System.out.println("4- Filtar por categoria");
+            System.out.println("4- Filtrar por categoria");
             System.out.println("5- Filtrar por prioridade");
             System.out.println("6- Filtrar por status");
             System.out.println("7- Atualizar status de uma tarefa");

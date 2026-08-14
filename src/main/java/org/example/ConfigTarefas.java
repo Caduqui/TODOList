@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ *
+ * @author Guilherme Lima Conte
+ */
+
 public class ConfigTarefas {
     private List<Tarefa> tarefas;
 
