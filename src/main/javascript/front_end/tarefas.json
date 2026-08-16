@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Configurar rotas da API",
+    "description": "Criar os endpoints REST no Spring Boot para o CRUD de tarefas",
+    "date": "2026-08-18",
+    "priority": 5,
+    "category": "Backend",
+    "status": "DOING"
+  },
+  {
+    "id": 2,
+    "name": "Estilizar cards no CSS",
+    "description": "Adicionar sombras, border-radius e cores para os status TODO, DOING e DONE",
+    "date": "2026-08-19",
+    "priority": 3,
+    "category": "Frontend",
+    "status": "TODO"
+  },
+  {
+    "id": 3,
+    "name": "Integrar Fetch API no JS",
+    "description": "Consumir a API Java para atualizar a lista de tarefas dinâmica no HTML",
+    "date": "2026-08-20",
+    "priority": 4,
+    "category": "Frontend",
+    "status": "TODO"
+  },
+  {
+    "id": 4,
+    "name": "Criar modelo de dados",
+    "description": "Definir a classe Tarefa.java com os atributos id, name, priority e o enum status",
+    "date": "2026-08-15",
+    "priority": 5,
+    "category": "Backend",
+    "status": "DONE"
+  },
+  {
+    "id": 5,
+    "name": "Comprar café",
+    "description": "Estoque de café para manter os estudos em dia durante a semana",
+    "date": "2026-08-21",
+    "priority": 1,
+    "category": "Pessoal",
+    "status": "TODO"
+  }
+]

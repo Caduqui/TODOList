@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODOList</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="cabecalho">
+    <h1>Bem vindo ao TODOLIT</h1>
+</header>
+
+<main>
+    <section class="cards_container">
+        <!-- TODO -->
+        <div class="cards" id="TODO">
+            <h1>TODO</h1>
+        </div>
+
+        <!-- DOING -->
+        <div class="cards" id="DOING">
+            <h1>DOING</h1>
+        </div>
+
+        <!-- DONE -->
+        <div class="cards" id="DONE">
+            <h1>DONE</h1>
+        </div>
+    </section>
+
+    <!-- referencia: <a href="https://www.flaticon.com/free-icons/pencil" title="pencil icons">Pencil icons created by Magnific - Flaticon</a> -->
+    <!-- referencia: <a href="https://www.flaticon.com/free-icons/trash-can" title="trash can icons">Trash can icons created by Magnific - Flaticon</a>-->
+    <div class="criarCard_container">
+        <div class="criarCard">
+            <form id="criarCardForm" >
+                <input type="text" id="input_nome" required placeholder="Digite o nome da tarefa">
+                <input type="text" id="input_descricao" required placeholder="Digite a descrição da tarefa">
+                <input type="date" id="input_data" required placeholder="Digite a data de vencimento">
+                <input type="number" id="input_prioridade" min="1" max="5" required placeholder="Digite o grau de prioridade (1 a 5)">
+                <input type="text" id="input_categoria" required placeholder="Digite a categoria da tarefa">
+
+                <select id="input_status" required>
+                    <option value="TODO">TODO</option>
+                    <option value="DOING">DOING</option>
+                    <option value="DONE">DONE</option>
+                </select>
+
+                <button type="submit">Adicionar Tarefa</button>
+            </form>
+        </div>
+        <button id="buttonCriarCard">Criar nova tarefa</button>
+    </div>
+
+</main>
+
+<footer>
+
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

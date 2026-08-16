@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+
+}
+h1 {
+    text-align: center;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+img {
+    width: 10px;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.cabecalho {
+    padding: 10px;
+    background-color: #E9ECEF;
+}
+
+.cabecalho h1 {
+    margin: 0;
+    text-align: center;
+}
+
+.cards_container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    gap: 2rem;
+    padding: 1.5rem 0 0 0;
+}
+
+.cards {
+    border: 1px solid #E6F0FA;
+    background-color: #E6F0FA;
+    width: 18rem;
+    height: 40rem;
+}
+
+.card_itens {
+    margin: 10px;
+    padding: 0;
+    border: 1px solid #E8F5E9;
+    background-color: #E8F5E9;
+    border-radius: 2px;
+    list-style-type: none;
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-size: 14px;
+}
+
+.tarefa_data {
+    text-align: end;
+    padding: 1px 5px;
+    font-size: 11px;
+}
+
+.criarCard_container {
+    display: flex;
+    justify-content: center;
+}
+
+.criarCard {
+    display: none;
+    position: absolute;
+    right: 45%;
+    top: 40%;
+    width: 20rem;
+    height: 20rem;
+    background-color: #E9ECEF;
+}
+
+#buttonCriarCard {
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+    background-color: #E9ECEF;
+    border: 2px solid #DEE2E6;
+    border-radius: 10px;
+    font-family: "Inter", sans-serif;
+    height: 5rem;
+    width: 12rem;
+}
+
+#buttonCriarCard:hover {
+    background-color: #DEE2E6;
+    border-color: #CED4DA;
+}
+
+#criarCardForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+
+}
+
+.criarCardForm input {
+    width: 18rem;
+}
+
+.criarCardForm button {
+    align-self: center;
+    width: 5rem;
+}

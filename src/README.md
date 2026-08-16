@@ -20,6 +20,10 @@ Atualizar o status de uma tarefa (TODO, DOING ou DONE)
 Filtro de tarefas por categoria prioridade e status
 Rebalanceamento ao inserir uma nova tarefa, ordenando a lista por prioridade
 
+Front-end:
+Foi implementado um quadro kanban onde você pode organizar as tarefas pelo status TODO, DOING, DONE. É possível visualizar, criar e excluir uma tarefa. Todas as tarefas são ordenadas com base em seu nível de prioridade que vai de 1 até 5, sendo 5 o com a maior prioridade.
+Estabeleci um banco de dados json apenas para ter algumas informações pré-estabelecidas durante o desenvolvimento e produção.
+
 Como executar:
 
 1. Clone o repositório:
