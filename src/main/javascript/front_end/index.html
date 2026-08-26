@@ -8,7 +8,7 @@
 <body>
 
 <header class="cabecalho">
-    <h1>Bem vindo ao TODOLIT</h1>
+    <h1>Bem vindo ao TODOLIST</h1>
 </header>
 
 <main>
@@ -31,12 +31,14 @@
 
     <!-- referencia: <a href="https://www.flaticon.com/free-icons/pencil" title="pencil icons">Pencil icons created by Magnific - Flaticon</a> -->
     <!-- referencia: <a href="https://www.flaticon.com/free-icons/trash-can" title="trash can icons">Trash can icons created by Magnific - Flaticon</a>-->
+    <!-- referencia: <a href="https://www.flaticon.com/free-icons/alarm" title="alarm icons">Alarm icons created by Pixel perfect - Flaticon</a>-->
+
     <div class="criarCard_container">
         <div class="criarCard">
             <form id="criarCardForm" >
                 <input type="text" id="input_nome" required placeholder="Digite o nome da tarefa">
                 <input type="text" id="input_descricao" required placeholder="Digite a descrição da tarefa">
-                <input type="date" id="input_data" required placeholder="Digite a data de vencimento">
+                <input type="datetime-local" id="input_data" required placeholder="Digite a data de vencimento">
                 <input type="number" id="input_prioridade" min="1" max="5" required placeholder="Digite o grau de prioridade (1 a 5)">
                 <input type="text" id="input_categoria" required placeholder="Digite a categoria da tarefa">
 
@@ -50,6 +52,30 @@
             </form>
         </div>
         <button id="buttonCriarCard">Criar nova tarefa</button>
+    </div>
+
+    <div id="alarme_container">
+        <form id="alarmeForm">
+            <h2>Adicionar alarme</h2>
+            <p id="alarme_nome_tarefa"></p>
+            <p>Alarmes cadastrados:</p>
+            <div id="lista_alarmes"></div>
+
+            <label for="alarme_prioridade">
+                Prioridade do alarme:
+            </label>
+
+            <select id="alarme_prioridade" required>
+                <option value="1">1 - 2 horas antes</option>
+                <option value="2">2 - 4 horas antes</option>
+                <option value="3">3 - 6 horas antes</option>
+                <option value="4">4 - 12 horas antes</option>
+                <option value="5">5 - 24 horas antes</option>
+            </select>
+
+            <button type="submit">Adicionar alarme</button>
+            <button type="button" id="cancelarAlarme">Cancelar</button>
+        </form>
     </div>
 
 </main>

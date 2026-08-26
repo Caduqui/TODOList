@@ -1,6 +1,6 @@
 package org.example;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final ConfigTarefas configTarefas = new ConfigTarefas();
-    private static final DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter dataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public static void main(String[] args) {
 
@@ -26,7 +26,8 @@ public class Main {
             System.out.println("5- Filtrar por prioridade");
             System.out.println("6- Filtrar por status");
             System.out.println("7- Atualizar status de uma tarefa");
-            System.out.println("8- Sair");
+            System.out.println("8- Adicionar alarme");
+            System.out.println("9- Sair");
 
             try {
                 byte opcao = Byte.parseByte(scanner.nextLine());
@@ -53,6 +54,9 @@ public class Main {
                         atualizarStatus();
                         break;
                     case 8:
+                        adicionarAlarme();
+                        break;
+                    case 9:
                         return;
                     default:
                         System.out.println("Opção inválida");
@@ -71,8 +75,8 @@ public class Main {
         System.out.print("Descrição: ");
         String description = scanner.nextLine();
 
-        System.out.print("Data de vencimento (dd/mm/aaaa): ");
-        LocalDate date = LocalDate.parse(scanner.nextLine(), data);
+        System.out.print("Data de vencimento (dd/mm/aaaa) HH:mm: ");
+        LocalDateTime date = LocalDateTime.parse(scanner.nextLine(), dataHora);
 
         System.out.print("Prioridade (1 a 5): ");
         byte priority = Byte.parseByte(scanner.nextLine());
@@ -141,5 +145,25 @@ public class Main {
             System.out.println("Lista de tarefas:");
             tarefas.forEach(System.out::println);
         }
+    }
+
+    private static void adicionarAlarme() {
+        System.out.println("Insira o id da tarefa que você deseja adicionar o alarme: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        Tarefa tarefaSelecionada = configTarefas.buscarTarefaId(id);
+
+        if (tarefaSelecionada == null) {
+        System.out.println("tarefa não existe");
+        return;
+        }
+
+        System.out.println("Digite a prioridade do alarme (1 a 5): ");
+
+        int prioridade = Integer.parseInt(scanner.nextLine());
+        Alarme alarme = new Alarme(prioridade);
+
+        configTarefas.adicionarAlarme(tarefaSelecionada, alarme);
+
+        System.out.println("Alarme adicionado");
     }
 }

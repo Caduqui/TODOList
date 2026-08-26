@@ -1,6 +1,8 @@
 package org.example;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,12 +18,13 @@ public class Tarefa {
     private int id;
     private String name;
     private String description;
-    private LocalDate date;
+    private LocalDateTime date;
     private byte priority;
     private String category;
     private TarefaStatus status;
+    private List<Alarme> alarmes;
 
-    public Tarefa (String name, String description, LocalDate date, byte priority, String category) {
+    public Tarefa(String name, String description, LocalDateTime date, byte priority, String category) {
         if (priority < 1 || priority > 5) {
             throw new IllegalArgumentException("Prioridade deve ser entre 1 e 5");
         }
@@ -32,35 +35,47 @@ public class Tarefa {
         this.priority = priority;
         this.category = category;
         this.status = TarefaStatus.TODO;
+        this.alarmes = new ArrayList<>();
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName()  {
+    public String getName() {
         return name;
     }
 
-    public String getDescription()  {
+    public String getDescription() {
         return description;
     }
 
-    public LocalDate getDate()  {
+    public LocalDateTime getDate() {
         return date;
     }
-    public byte getPriority()  {
+
+    public byte getPriority() {
         return priority;
     }
-    public String getCategory()  {
+
+    public String getCategory() {
         return category;
     }
-    public TarefaStatus getStatus()  {
+
+    public TarefaStatus getStatus() {
         return status;
     }
 
     public void setStatus(TarefaStatus status) {
         this.status = status;
+    }
+
+    public void adicionarAlarme(Alarme alarme) {
+        alarmes.add(alarme);
+    }
+
+    public List<Alarme> getAlarmes() {
+        return new ArrayList<>(alarmes);
     }
 
     @Override
