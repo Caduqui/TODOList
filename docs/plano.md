@@ -193,6 +193,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
   - given quantidade 1 e destino `DONE`, when resumo, then devolve "1 tarefa movida para DONE";
   - given quantidade 0 e destino `DONE`, when resumo, then devolve "Nenhuma tarefa alterada: as selecionadas já estavam em DONE".
 - **Validação:** os 10 testes falham antes e passam depois; os anteriores continuam passando.
+- **Situação:** concluída.
 
 ### 9. Seleção na tela e barra de ação
 
