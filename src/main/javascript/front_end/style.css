@@ -134,6 +134,16 @@ button {
     gap: 1rem;
 }
 
+#aviso_storage {
+    display: none;
+    padding: 10px;
+    background-color: #FFF3CD;
+    border: 1px solid #FFE69C;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+}
+
 .aviso_alarme {
     position: fixed;
     top: 20px;

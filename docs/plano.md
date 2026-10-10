@@ -157,6 +157,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
 - **Validação:**
   - suíte continua verde (o retorno `false` já é coberto pela tarefa 1);
   - no console, `Storage.prototype.setItem = () => { throw new Error("cheio") }` e criar uma tarefa: o card aparece, o aviso aparece e não há erro não tratado no console.
+- **Situação:** implementada; conferida na tela pelo autor.
 
 ### 7. `SelecaoTarefas`
 

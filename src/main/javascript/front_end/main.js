@@ -2,14 +2,26 @@ const criarCardForm = document.getElementById("criarCardForm");
 const buttoncriarCard = document.getElementById("buttonCriarCard");
 const alarmeForm = document.getElementById("alarmeForm");
 const alarmeContainer = document.getElementById("alarme_container")
-const armazenamento = new ArmazenamentoTarefas(localStorage);
+const avisoStorage = document.getElementById("aviso_storage");
+const armazenamento = new ArmazenamentoTarefas(obterStorage());
 
 let listaTarefas = []
 let edicao = null;
 let tarefaAlarmeSelecionado = null;
 
+function obterStorage() {
+    try {
+        return localStorage;
+    } catch (erro) {
+        // navegador com o local storage bloqueado
+        return null;
+    }
+}
+
 function salvarTarefas() {
-    armazenamento.salvar(listaTarefas);
+    const salvou = armazenamento.salvar(listaTarefas);
+
+    avisoStorage.style.display = salvou ? "none" : "block";
 }
 
 function renderizarTarefas() {
