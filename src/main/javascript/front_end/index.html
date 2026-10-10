@@ -33,6 +33,21 @@
         </div>
     </section>
 
+    <div id="acao_massa">
+        <span id="contador_selecao">0 selecionadas</span>
+
+        <label for="acao_massa_status">Mover para:</label>
+
+        <select id="acao_massa_status">
+            <option value="BACKLOG">BACKLOG</option>
+            <option value="TODO">TODO</option>
+            <option value="DOING">DOING</option>
+            <option value="DONE" selected>DONE</option>
+        </select>
+
+        <button type="button" id="executarAcaoMassa" disabled>Executar</button>
+    </div>
+
     <!-- referencia: <a href="https://www.flaticon.com/free-icons/pencil" title="pencil icons">Pencil icons created by Magnific - Flaticon</a> -->
     <!-- referencia: <a href="https://www.flaticon.com/free-icons/trash-can" title="trash can icons">Trash can icons created by Magnific - Flaticon</a>-->
     <!-- referencia: <a href="https://www.flaticon.com/free-icons/alarm" title="alarm icons">Alarm icons created by Pixel perfect - Flaticon</a>-->
@@ -90,6 +105,7 @@
 </footer>
 
 <script src="ArmazenamentoTarefas.js"></script>
+<script src="SelecaoTarefas.js"></script>
 <script src="main.js"></script>
 </body>
 </html>

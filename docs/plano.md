@@ -204,6 +204,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
   - CA-B11, CA-B12, CA-B13, CA-B14, CA-B21 e CA-B22;
   - recarregar limpa a seleção e a chave não guarda nada sobre ela;
   - "Executar" ainda não faz nada nesta etapa.
+- **Situação:** implementada; conferida na tela pelo autor.
 
 ### 10. Botão "Executar"
 

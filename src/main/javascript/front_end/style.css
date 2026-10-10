@@ -134,6 +134,24 @@ button {
     gap: 1rem;
 }
 
+.card_selecao {
+    padding: 2px 5px;
+}
+
+#acao_massa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+}
+
+#executarAcaoMassa:disabled {
+    cursor: not-allowed;
+}
+
 #aviso_storage {
     display: none;
     padding: 10px;

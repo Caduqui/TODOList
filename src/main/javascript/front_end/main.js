@@ -3,7 +3,10 @@ const buttoncriarCard = document.getElementById("buttonCriarCard");
 const alarmeForm = document.getElementById("alarmeForm");
 const alarmeContainer = document.getElementById("alarme_container")
 const avisoStorage = document.getElementById("aviso_storage");
+const contadorSelecao = document.getElementById("contador_selecao");
+const buttonExecutarAcaoMassa = document.getElementById("executarAcaoMassa");
 const armazenamento = new ArmazenamentoTarefas(obterStorage());
+const selecao = new SelecaoTarefas();
 
 let listaTarefas = []
 let edicao = null;
@@ -24,6 +27,11 @@ function salvarTarefas() {
     avisoStorage.style.display = salvou ? "none" : "block";
 }
 
+function atualizarBarraSelecao() {
+    contadorSelecao.textContent = selecao.textoContador();
+    buttonExecutarAcaoMassa.disabled = selecao.quantidade() === 0;
+}
+
 function renderizarTarefas() {
     document.querySelectorAll(".card_itens").forEach(card => card.remove());
     listaTarefas.sort((a, b) => Number(b.priority) - Number(a.priority));
@@ -36,6 +44,9 @@ function renderizarTarefas() {
             ul.classList.add("card_itens");
 
             ul.innerHTML = `
+                <li class="card_selecao">
+                    <input type="checkbox" aria-label="Selecionar tarefa" onchange="alternarSelecao(${tarefa.id}, this.checked)" ${selecao.estaSelecionada(tarefa.id) ? "checked" : ""}/>
+                </li>
                 <li><strong>Nome</strong>: ${tarefa.name} </li>
                 <li><strong>Descrição:</strong> ${tarefa.description} </li>
                 <li><strong>Prioridade:</strong> ${tarefa.priority} </li>
@@ -56,6 +67,8 @@ function renderizarTarefas() {
             coluna.appendChild(ul);
         }
     });
+
+    atualizarBarraSelecao();
 }
 
 function carregarSeed() {
@@ -91,8 +104,14 @@ if (tarefasSalvas !== null) {
 
 window.removerTarefa = function (id) {
     listaTarefas = listaTarefas.filter(tarefa => tarefa.id !== id);
+    selecao.remover(id);
     salvarTarefas();
     renderizarTarefas();
+};
+
+window.alternarSelecao = function (id, marcada) {
+    selecao.alternar(id, marcada);
+    atualizarBarraSelecao();
 };
 
 window.prepararEdicao = function (id) {
