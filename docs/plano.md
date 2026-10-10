@@ -175,6 +175,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
   - given um selecionado, when textoContador, then devolve "1 selecionada";
   - given nenhum selecionado, when textoContador, then devolve "0 selecionadas".
 - **Validação:** os 10 testes falham antes e passam depois; os anteriores continuam passando.
+- **Situação:** concluída.
 
 ### 8. `MudancaStatusEmMassa`
 
