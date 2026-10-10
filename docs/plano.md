@@ -138,6 +138,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
   - CA-B01 a CA-B06;
   - CA-B10: no console, `localStorage.setItem("todolist.tarefas", "abc")` e recarregar;
   - RB-05: apagar a chave, bloquear `tarefas.json` na aba Network e recarregar; o quadro abre vazio e uma tarefa criada é gravada.
+- **Situação:** implementada; conferida na tela pelo autor.
 
 ### 5. Persistir os alarmes
 

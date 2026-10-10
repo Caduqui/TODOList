@@ -46,22 +46,36 @@ function renderizarTarefas() {
     });
 }
 
-fetch("tarefas.json").then(response => response.json()).then(tarefas => {
-    listaTarefas = tarefas.map((tarefa, index) => ({
-        id: tarefa.id || Date.now() + index,
-        name: tarefa.name,
-        description: tarefa.description,
-        date: tarefa.date,
-        priority: tarefa.priority,
-        category: tarefa.category,
-        status: tarefa.status || "BACKLOG",
-        alarmes: tarefa.alarmes || []
-    }));
+function carregarSeed() {
+    fetch("tarefas.json").then(response => response.json()).then(tarefas => {
+        listaTarefas = tarefas.map((tarefa, index) => ({
+            id: tarefa.id || Date.now() + index,
+            name: tarefa.name,
+            description: tarefa.description,
+            date: tarefa.date,
+            priority: tarefa.priority,
+            category: tarefa.category,
+            status: tarefa.status || "BACKLOG",
+            alarmes: tarefa.alarmes || []
+        }));
 
+        salvarTarefas();
+        renderizarTarefas();
+        verificarAlarmes();
+
+    }).catch(erro => console.error("Erro ao carregar json: ", erro));
+}
+
+const tarefasSalvas = armazenamento.carregar();
+
+if (tarefasSalvas !== null) {
+    listaTarefas = tarefasSalvas;
     renderizarTarefas();
     verificarAlarmes();
-
-}).catch(erro => console.error("Erro ao carregar json: ", erro));
+} else {
+    // primeira visita ou conteúdo gravado inválido
+    carregarSeed();
+}
 
 window.removerTarefa = function (id) {
     listaTarefas = listaTarefas.filter(tarefa => tarefa.id !== id);
