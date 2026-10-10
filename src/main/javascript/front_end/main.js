@@ -49,7 +49,7 @@ fetch("tarefas.json").then(response => response.json()).then(tarefas => {
         date: tarefa.date,
         priority: tarefa.priority,
         category: tarefa.category,
-        status: tarefa.status || "TODO",
+        status: tarefa.status || "BACKLOG",
         alarmes: tarefa.alarmes || []
     }));
 
@@ -159,6 +159,9 @@ function verificarAlarmes() {
         if (tarefa.status === "DONE")
             return
 
+        if (tarefa.status === "BACKLOG")
+            return
+
         if (!tarefa.alarmes)
             return
 
@@ -242,7 +245,7 @@ buttoncriarCard.addEventListener("click", () => {
 
     edicao = null;
     criarCardForm.reset();
-    document.getElementById("input_status").value = "TODO";
+    document.getElementById("input_status").value = "BACKLOG";
 
     if (divcriarCard.style.display == "none" || divcriarCard.style.display == "") {
         divcriarCard.style.display = "block";

@@ -44,18 +44,34 @@ public class ConfigTarefas {
     public boolean atualizarStatus(int id, Tarefa.TarefaStatus novoStatus) {
         for (Tarefa t : tarefas) {
             if (t.getId() == id) {
+                boolean saiuDoBacklog = t.getStatus() == Tarefa.TarefaStatus.BACKLOG
+                        && novoStatus != Tarefa.TarefaStatus.BACKLOG;
                 t.setStatus(novoStatus);
+                if (saiuDoBacklog) {
+                    reconferirAlarmes(t);
+                }
                 return true;
             }
         }
         return false;
     }
 
+    private void reconferirAlarmes(Tarefa tarefa) {
+        LocalDateTime agora = LocalDateTime.now();
+
+        for (Alarme alarme : tarefa.getAlarmes()) {
+            LocalDateTime horarioAlarme = alarme.calcularHorario(tarefa);
+
+            if (!agora.isBefore(horarioAlarme) && agora.isBefore(tarefa.getDate())) {
+                dispararAlarme(tarefa, alarme);
+            }
+        }
+    }
+
     public List<Tarefa> getTodasTarefas() {
         return new ArrayList<>(tarefas);
     }
 
-    // verificar depois stream
     public List<Tarefa> getTarefasCategoria(String category) {
         return tarefas.stream().filter(t -> t.getCategory().equalsIgnoreCase(category)).collect(Collectors.toList());
     }
@@ -86,7 +102,6 @@ public class ConfigTarefas {
         if (delay > 0) {
             scheduler.schedule( () -> dispararAlarme(tarefa, alarme), delay, TimeUnit.MILLISECONDS);
         } else if (agora.isBefore(tarefa.getDate())) {
-            // já entrou no período de antecedencia
             dispararAlarme(tarefa, alarme);
         }
     }
@@ -98,6 +113,10 @@ public class ConfigTarefas {
 
     public void dispararAlarme(Tarefa tarefa, Alarme alarme) {
         if (tarefa.getStatus() == Tarefa.TarefaStatus.DONE) {
+            return;
+        }
+
+        if (tarefa.getStatus() == Tarefa.TarefaStatus.BACKLOG) {
             return;
         }
 

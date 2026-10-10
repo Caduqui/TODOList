@@ -16,12 +16,13 @@ Bibliotecas: java.util e java.time para manipular datas.
 Adicionar tarefa passando os parâmetros nome, descrição, data de vencimento, prioridade de 1 a 5, categoria
 Listar todas as tarefas
 Remover tarefa por ID
-Atualizar o status de uma tarefa (TODO, DOING ou DONE)
+Atualizar o status de uma tarefa (BACKLOG, TODO, DOING ou DONE)
+Toda tarefa nova começa no status BACKLOG
 Filtro de tarefas por categoria prioridade e status
 Rebalanceamento ao inserir uma nova tarefa, ordenando a lista por prioridade
 
 Front-end:
-Foi implementado um quadro kanban onde você pode organizar as tarefas pelo status TODO, DOING, DONE. É possível visualizar, criar e excluir uma tarefa. Todas as tarefas são ordenadas com base em seu nível de prioridade que vai de 1 até 5, sendo 5 o com a maior prioridade.
+Foi implementado um quadro kanban onde você pode organizar as tarefas pelo status BACKLOG, TODO, DOING, DONE. Toda tarefa nova começa no BACKLOG. É possível visualizar, criar e excluir uma tarefa. Todas as tarefas são ordenadas com base em seu nível de prioridade que vai de 1 até 5, sendo 5 o com a maior prioridade.
 Estabeleci um banco de dados json apenas para ter algumas informações pré-estabelecidas durante o desenvolvimento e produção.
 
 **Como executar:**
@@ -44,6 +45,8 @@ java Main
 Cada alarme possui uma prioridade própria que condiz com seu tempo de antecedência para realizar os alertas.
 
 No back-end foi criado a classe alarme que é responsável por armazenar a prioridade do alarme, identificar se ele já foi disparado e calcular sua antecedência. O gerenciamento do disparado utiliza ScheludedExecutorService, permitindo o "efeito" do alarme enquanto o programa roda normalmente.
+
+Tarefas com status BACKLOG ou DONE não disparam alarme. Quando a tarefa sai do BACKLOG, os alarmes que ficaram pendentes voltam a valer.
 
 No front-end cada tarefa possui um ícone para clicar no alarme e exibir uma caixa onde pode adicionar um novo alarme, verificar a lista de alarmes já adicionados e excluir alarmes.
 

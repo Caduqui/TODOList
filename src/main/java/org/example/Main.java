@@ -110,7 +110,7 @@ public class Main {
     }
 
     private static void filtroStatus() {
-        System.out.print("Digite o status (TODO, DOING, DONE): ");
+        System.out.print("Digite o status (BACKLOG, TODO, DOING, DONE): ");
         Tarefa.TarefaStatus status = Tarefa.TarefaStatus.valueOf(scanner.nextLine().toUpperCase());
         printTarefa(configTarefas.getTarefasStatus(status));
     }
@@ -118,7 +118,7 @@ public class Main {
     private static void atualizarStatus() {
         System.out.print("ID da tarefa:");
         int id = Integer.parseInt(scanner.nextLine());
-        System.out.print("Novo status (TODO, DOING, DONE): ");
+        System.out.print("Novo status (BACKLOG, TODO, DOING, DONE): ");
         Tarefa.TarefaStatus status = Tarefa.TarefaStatus.valueOf(scanner.nextLine().toUpperCase());
 
         if (configTarefas.atualizarStatus(id, status)) {

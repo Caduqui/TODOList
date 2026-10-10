@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Tarefa {
     public enum TarefaStatus {
-        TODO, DOING, DONE
+        BACKLOG, TODO, DOING, DONE
     }
 
     private static int contadorId = 1;
@@ -34,7 +34,7 @@ public class Tarefa {
         this.date = date;
         this.priority = priority;
         this.category = category;
-        this.status = TarefaStatus.TODO;
+        this.status = TarefaStatus.BACKLOG;
         this.alarmes = new ArrayList<>();
     }
 
