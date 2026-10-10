@@ -2,10 +2,15 @@ const criarCardForm = document.getElementById("criarCardForm");
 const buttoncriarCard = document.getElementById("buttonCriarCard");
 const alarmeForm = document.getElementById("alarmeForm");
 const alarmeContainer = document.getElementById("alarme_container")
+const armazenamento = new ArmazenamentoTarefas(localStorage);
 
 let listaTarefas = []
 let edicao = null;
 let tarefaAlarmeSelecionado = null;
+
+function salvarTarefas() {
+    armazenamento.salvar(listaTarefas);
+}
 
 function renderizarTarefas() {
     document.querySelectorAll(".card_itens").forEach(card => card.remove());
@@ -60,6 +65,7 @@ fetch("tarefas.json").then(response => response.json()).then(tarefas => {
 
 window.removerTarefa = function (id) {
     listaTarefas = listaTarefas.filter(tarefa => tarefa.id !== id);
+    salvarTarefas();
     renderizarTarefas();
 };
 
@@ -277,6 +283,7 @@ criarCardForm.addEventListener("submit", (e) => {
         });
     }
 
+    salvarTarefas();
     renderizarTarefas();
     criarCardForm.reset();
     document.querySelector(".criarCard").style.display = "none";

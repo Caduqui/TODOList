@@ -127,6 +127,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
   - suíte continua verde;
   - na tela: criar uma tarefa e ver a chave `todolist.tarefas` aparecer com ela; editar e ver o valor mudar; remover e ver a tarefa sair da chave;
   - recarregar ainda volta ao seed, o que é esperado até a tarefa 4.
+- **Situação:** concluída; conferida na tela pelo autor.
 
 ### 4. Carregar do local storage ao abrir
 
