@@ -5,8 +5,11 @@ const alarmeContainer = document.getElementById("alarme_container")
 const avisoStorage = document.getElementById("aviso_storage");
 const contadorSelecao = document.getElementById("contador_selecao");
 const buttonExecutarAcaoMassa = document.getElementById("executarAcaoMassa");
+const selectAcaoMassaStatus = document.getElementById("acao_massa_status");
+const mensagemAcaoMassa = document.getElementById("mensagem_acao_massa");
 const armazenamento = new ArmazenamentoTarefas(obterStorage());
 const selecao = new SelecaoTarefas();
+const mudancaStatus = new MudancaStatusEmMassa();
 
 let listaTarefas = []
 let edicao = null;
@@ -111,8 +114,22 @@ window.removerTarefa = function (id) {
 
 window.alternarSelecao = function (id, marcada) {
     selecao.alternar(id, marcada);
+    mensagemAcaoMassa.textContent = "";
     atualizarBarraSelecao();
 };
+
+buttonExecutarAcaoMassa.addEventListener("click", () => {
+    if (selecao.quantidade() === 0)
+        return;
+
+    const statusDestino = selectAcaoMassaStatus.value;
+    const alteradas = mudancaStatus.aplicar(listaTarefas, selecao.ids(), statusDestino);
+
+    salvarTarefas();
+    selecao.limpar();
+    renderizarTarefas();
+    mensagemAcaoMassa.textContent = mudancaStatus.resumo(alteradas, statusDestino);
+});
 
 window.prepararEdicao = function (id) {
     const tarefa = listaTarefas.find(t => t.id === id);

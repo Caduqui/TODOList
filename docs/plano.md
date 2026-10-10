@@ -213,6 +213,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
 - **Validação:**
   - suíte continua verde;
   - CA-B15 a CA-B20, CA-B23 e CA-B24.
+- **Situação:** implementada; falta a conferência na tela pelo autor.
 
 ### 11. Regressão e documentação
 
