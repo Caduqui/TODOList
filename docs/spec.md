@@ -7,7 +7,7 @@ O trabalho está dividido em duas partes, entregues nesta ordem:
 | Parte | O que entrega | Onde mexe | Situação |
 | --- | --- | --- | --- |
 | **A** | Coluna e status `BACKLOG` | Front-end e CLI Java | Implementada |
-| **B** | Persistência no local storage e mudança de status em massa | Somente front-end | Especificada, aguardando implementação |
+| **B** | Persistência no local storage e mudança de status em massa | Somente front-end | Implementada |
 
 A Parte B parte do princípio de que a Parte A já está pronta. Fazer o BACKLOG antes da persistência evita ter de migrar dados já gravados no navegador.
 

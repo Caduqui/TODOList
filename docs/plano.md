@@ -213,7 +213,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
 - **Validação:**
   - suíte continua verde;
   - CA-B15 a CA-B20, CA-B23 e CA-B24.
-- **Situação:** implementada; falta a conferência na tela pelo autor.
+- **Situação:** implementada; conferida na tela pelo autor.
 
 ### 11. Regressão e documentação
 
@@ -228,6 +228,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
   - repassar CA-A01 a CA-A09 e o fluxo de editar tarefa e abrir o modal de alarme;
   - `./gradlew build` passa;
   - `git status` não mostra nenhum arquivo Java nem o `tarefas.json` alterados pelas tarefas 1 a 11.
+- **Situação:** documentação atualizada e conferências automáticas feitas; feito conferência final na tela pelo autor.
 
 ## Pendências
 
