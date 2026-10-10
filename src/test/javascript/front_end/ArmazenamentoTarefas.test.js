@@ -4,8 +4,8 @@ const { ArmazenamentoTarefas } = require("../../../main/javascript/front_end/Arm
 
 const CHAVE = "todolist.tarefas";
 
-function criarStorageFalso() {
-    const dados = {};
+function criarStorageFalso(dadosIniciais = {}) {
+    const dados = { ...dadosIniciais };
 
     return {
         getItem(chave) {
@@ -26,6 +26,44 @@ function criarStorageQueFalhaAoGravar() {
             throw new Error("storage cheio");
         }
     };
+}
+
+function criarStorageQueFalhaAoLer() {
+    return {
+        getItem() {
+            throw new Error("storage indisponível");
+        },
+        setItem() {
+        }
+    };
+}
+
+function criarTarefasComAlarme() {
+    return [
+        {
+            id: 1760000000001,
+            name: "Entregar relatório",
+            description: "Relatório semanal",
+            date: "2026-10-12T17:00",
+            priority: "4",
+            category: "Trabalho",
+            status: "DOING",
+            alarmes: [
+                { id: 1760000000002, prioridade: 2, disparado: true },
+                { id: 1760000000003, prioridade: 5, disparado: false }
+            ]
+        },
+        {
+            id: 5,
+            name: "Comprar café",
+            description: "Estoque para a semana",
+            date: "2026-08-21",
+            priority: 1,
+            category: "Pessoal",
+            status: "BACKLOG",
+            alarmes: []
+        }
+    ];
 }
 
 describe("ArmazenamentoTarefas", () => {
@@ -87,6 +125,104 @@ describe("ArmazenamentoTarefas", () => {
 
             // then
             assert.equal(salvou, false);
+        });
+    });
+
+    describe("carregar", () => {
+        it("given chave ausente, when carregar, then devolve null", (t) => {
+            // given
+            t.mock.method(console, "error", () => {});
+            const armazenamento = new ArmazenamentoTarefas(criarStorageFalso());
+
+            // when
+            const tarefas = armazenamento.carregar();
+
+            // then
+            assert.equal(tarefas, null);
+            assert.equal(console.error.mock.callCount(), 0);
+        });
+
+        it("given um array válido gravado, when carregar, then devolve as tarefas com id, alarmes e disparado preservados", () => {
+            // given
+            const gravadas = criarTarefasComAlarme();
+            const storage = criarStorageFalso({ [CHAVE]: JSON.stringify(gravadas) });
+            const armazenamento = new ArmazenamentoTarefas(storage);
+
+            // when
+            const tarefas = armazenamento.carregar();
+
+            // then
+            assert.deepEqual(tarefas, gravadas);
+            assert.equal(tarefas[0].id, 1760000000001);
+            assert.equal(tarefas[0].alarmes[0].id, 1760000000002);
+            assert.equal(tarefas[0].alarmes[0].disparado, true);
+            assert.equal(tarefas[0].alarmes[1].disparado, false);
+        });
+
+        it("given um array vazio gravado, when carregar, then devolve um array vazio e não null", () => {
+            // given
+            const storage = criarStorageFalso({ [CHAVE]: "[]" });
+            const armazenamento = new ArmazenamentoTarefas(storage);
+
+            // when
+            const tarefas = armazenamento.carregar();
+
+            // then
+            assert.deepEqual(tarefas, []);
+        });
+
+        it("given um texto que não é JSON, when carregar, then devolve null", (t) => {
+            // given
+            t.mock.method(console, "error", () => {});
+            const storage = criarStorageFalso({ [CHAVE]: "abc" });
+            const armazenamento = new ArmazenamentoTarefas(storage);
+
+            // when
+            const tarefas = armazenamento.carregar();
+
+            // then
+            assert.equal(tarefas, null);
+            assert.equal(console.error.mock.callCount(), 1);
+        });
+
+        it("given um JSON válido que não é array, when carregar, then devolve null", (t) => {
+            // given
+            t.mock.method(console, "error", () => {});
+            const storage = criarStorageFalso({ [CHAVE]: JSON.stringify({ id: 1, name: "Tarefa" }) });
+            const armazenamento = new ArmazenamentoTarefas(storage);
+
+            // when
+            const tarefas = armazenamento.carregar();
+
+            // then
+            assert.equal(tarefas, null);
+            assert.equal(console.error.mock.callCount(), 1);
+        });
+
+        it("given um storage que falha ao ler, when carregar, then devolve null", (t) => {
+            // given
+            t.mock.method(console, "error", () => {});
+            const armazenamento = new ArmazenamentoTarefas(criarStorageQueFalhaAoLer());
+
+            // when
+            const tarefas = armazenamento.carregar();
+
+            // then
+            assert.equal(tarefas, null);
+            assert.equal(console.error.mock.callCount(), 1);
+        });
+
+        it("given uma lista salva com salvar, when carregar, then devolve uma lista igual", () => {
+            // given
+            const armazenamento = new ArmazenamentoTarefas(criarStorageFalso());
+            const salvas = criarTarefasComAlarme();
+            armazenamento.salvar(salvas);
+
+            // when
+            const tarefas = armazenamento.carregar();
+
+            // then
+            assert.deepEqual(tarefas, salvas);
         });
     });
 });

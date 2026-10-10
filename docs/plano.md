@@ -117,6 +117,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
   - given um storage que lança erro ao ler, when carregar, then devolve `null`;
   - given uma lista salva com `salvar`, when carregar, then devolve uma lista igual.
 - **Validação:** os 7 testes novos falham antes e passam depois; os 3 da tarefa 1 continuam passando.
+- **Situação:** concluída.
 
 ### 3. Gravar ao criar, editar e remover tarefa
 
