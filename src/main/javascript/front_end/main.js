@@ -116,6 +116,7 @@ window.removerAlarme = function (idAlarme) {
 
     tarefaAlarmeSelecionado.alarmes = tarefaAlarmeSelecionado.alarmes.filter(alarme => alarme.id !== idAlarme);
 
+    salvarTarefas();
     renderizarAlarmes(tarefaAlarmeSelecionado);
 }
 
@@ -138,6 +139,7 @@ alarmeForm.addEventListener("submit", (e) => {
     }
 
     tarefaAlarmeSelecionado.alarmes.push(alarme);
+    salvarTarefas();
     renderizarAlarmes(tarefaAlarmeSelecionado);
     verificarAlarmes();
 });
@@ -205,6 +207,7 @@ function dispararAlarme(tarefa, alarme) {
         return
 
     alarme.disparado = true;
+    salvarTarefas();
 
     const aviso = document.createElement("div");
 

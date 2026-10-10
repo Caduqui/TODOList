@@ -148,6 +148,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
   - suíte continua verde;
   - CA-B07 e CA-B08;
   - CA-B09: criar uma tarefa em `TODO` que vence em 1 hora, com alarme de prioridade 1. O aviso aparece, a chave mostra `"disparado": true` e, após recarregar, o aviso não volta.
+- **Situação:** implementada; conferida na tela pelo autor.
 
 ### 6. Avisar quando não for possível gravar
 
