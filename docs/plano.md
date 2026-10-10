@@ -2,7 +2,7 @@
 
 Implementa a **Parte B** de `docs/spec.md`. Os códigos `RB-xx` e `CA-Bxx` citados aqui são as regras e os critérios de aceite da spec. Leia também o `AGENTS.md` antes de começar.
 
-Todas as tarefas depois da 0 mexem só no front-end. Nenhum arquivo Java, nem o `tarefas.json`, é alterado.
+Todas as tarefas mexem só no front-end. Nenhum arquivo Java, nem o `tarefas.json`, é alterado.
 
 ## Decisões de implementação
 
@@ -93,13 +93,6 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
 
 ## Tarefas
 
-### 0. Trazer o BACKLOG para a branch
-
-- **O que:** a `feature/localstorage` está um commit atrás da `main` e ainda não tem a coluna BACKLOG (commit `cd43347`). Fazer o fast-forward com `git merge --ff-only main`. Não há conflito: a branch não tem commits próprios.
-- **Arquivos:** nenhum editado à mão; o merge atualiza os seis arquivos do commit do BACKLOG.
-- **Validação:** `git log --oneline -1` mostra `cd43347`; `./gradlew build` passa; a página abre com as quatro colunas.
-- **Situação:** concluída. O merge foi feito com autorização do autor, o build passou e o `index.html` tem as quatro colunas.
-
 ### 1. `ArmazenamentoTarefas.salvar`
 
 - **O que:** criar a classe com o construtor e o método `salvar`, que grava a lista como JSON na chave `todolist.tarefas` e não deixa o erro de gravação escapar (RB-01, RB-06).
@@ -109,6 +102,7 @@ A conferência manual é feita com a página servida por HTTP e o DevTools abert
   - given uma lista vazia, when salvar, then a chave recebe `[]`;
   - given um storage que lança erro ao gravar, when salvar, then o retorno é `false` e nenhum erro é propagado.
 - **Validação:** rodar a suíte antes da classe existir e ver os 3 testes falharem; implementar; rodar de novo e ver os 3 passarem.
+- **Situação:** concluída.
 
 ### 2. `ArmazenamentoTarefas.carregar`
 
