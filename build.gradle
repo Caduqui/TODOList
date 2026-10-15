@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'groovy'
 }
 
 group = 'org.example'
@@ -11,7 +11,8 @@ repositories {
 
 dependencies {
     testImplementation platform('org.junit:junit-bom:6.0.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation platform('org.spockframework:spock-bom:2.5-groovy-5.0')
+    testImplementation 'org.spockframework:spock-core'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

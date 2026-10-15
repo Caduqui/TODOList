@@ -27,7 +27,8 @@ public class Main {
             System.out.println("6- Filtrar por status");
             System.out.println("7- Atualizar status de uma tarefa");
             System.out.println("8- Adicionar alarme");
-            System.out.println("9- Sair");
+            System.out.println("9- Editar tarefa");
+            System.out.println("10- Sair");
 
             try {
                 byte opcao = Byte.parseByte(scanner.nextLine());
@@ -57,6 +58,9 @@ public class Main {
                         adicionarAlarme();
                         break;
                     case 9:
+                        editarTarefa();
+                        break;
+                    case 10:
                         return;
                     default:
                         System.out.println("Opção inválida");
@@ -126,6 +130,40 @@ public class Main {
         } else {
             System.out.println("Tarefa não encontrada");
         }
+    }
+
+    private static void editarTarefa() {
+        System.out.print("ID da tarefa: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        Tarefa tarefa = configTarefas.buscarTarefaId(id);
+
+        if (tarefa == null) {
+            System.out.println("Tarefa não encontrada");
+            return;
+        }
+
+        System.out.print("Nome [" + tarefa.getName() + "]: ");
+        String name = lerOuManter(tarefa.getName());
+
+        System.out.print("Descrição [" + tarefa.getDescription() + "]: ");
+        String description = lerOuManter(tarefa.getDescription());
+
+        System.out.print("Data de vencimento (dd/mm/aaaa) HH:mm [" + tarefa.getDate().format(dataHora) + "]: ");
+        LocalDateTime date = LocalDateTime.parse(lerOuManter(tarefa.getDate().format(dataHora)), dataHora);
+
+        System.out.print("Prioridade (1 a 5) [" + tarefa.getPriority() + "]: ");
+        byte priority = Byte.parseByte(lerOuManter(String.valueOf(tarefa.getPriority())));
+
+        System.out.print("Categoria [" + tarefa.getCategory() + "]: ");
+        String category = lerOuManter(tarefa.getCategory());
+
+        configTarefas.editarTarefa(id, name, description, date, priority, category);
+        System.out.println("Tarefa editada!");
+    }
+
+    private static String lerOuManter(String valorAtual) {
+        String entrada = scanner.nextLine();
+        return entrada.isBlank() ? valorAtual : entrada;
     }
 
     private static void removerTarefa() {

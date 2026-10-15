@@ -56,6 +56,21 @@ public class ConfigTarefas {
         return false;
     }
 
+    public boolean editarTarefa(int id, String name, String description, LocalDateTime date, byte priority, String category) {
+        Tarefa tarefa = buscarTarefaId(id);
+        if (tarefa == null) {
+            return false;
+        }
+
+        tarefa.setPriority(priority);
+        tarefa.setName(name);
+        tarefa.setDescription(description);
+        tarefa.setDate(date);
+        tarefa.setCategory(category);
+        rebalance();
+        return true;
+    }
+
     private void reconferirAlarmes(Tarefa tarefa) {
         LocalDateTime agora = LocalDateTime.now();
 

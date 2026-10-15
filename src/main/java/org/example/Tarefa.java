@@ -46,20 +46,43 @@ public class Tarefa {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDateTime getDate() {
         return date;
     }
 
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     public byte getPriority() {
         return priority;
     }
 
+    public void setPriority(byte priority) {
+        if (priority < 1 || priority > 5) {
+            throw new IllegalArgumentException("Prioridade deve ser entre 1 e 5");
+        }
+        this.priority = priority;
+    }
+
     public String getCategory() {
         return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public TarefaStatus getStatus() {
