@@ -50,6 +50,26 @@ Tarefas com status BACKLOG ou DONE não disparam alarme. Quando a tarefa sai do 
 
 No front-end cada tarefa possui um ícone para clicar no alarme e exibir uma caixa onde pode adicionar um novo alarme, verificar a lista de alarmes já adicionados e excluir alarmes.
 
+**Persistência no local storage**
+
+As tarefas e os alarmes do front-end ficam gravados no local storage do navegador, na chave todolist.tarefas. Toda alteração (criar, editar ou remover tarefa, mudar status, adicionar ou excluir alarme) é gravada na hora, e ao abrir a página o quadro volta como foi deixado.
+
+O arquivo tarefas.json só é carregado na primeira visita. Para voltar aos dados iniciais, apague a chave todolist.tarefas nas ferramentas do navegador e recarregue a página.
+
+Um alarme que já avisou não avisa de novo depois de recarregar a página. Se o navegador não conseguir gravar, o quadro continua funcionando e mostra um aviso de que as alterações não estão sendo salvas.
+
+**Mudança de status de várias tarefas**
+
+Cada card tem uma caixa de seleção. Marque as tarefas, de qualquer coluna, escolha o status em "Mover para" e clique em "Executar": todas as marcadas mudam de status de uma vez, e uma mensagem informa quantas foram movidas.
+
+**Testes**
+
+Os testes unitários do front-end ficam em `src/test/javascript/front_end` e usam o executor de testes que já vem no Node, sem instalar nada. Cada teste segue o formato given / when / then.
+
+Para rodar, a partir da raiz do projeto:
+
+node --test "src/test/javascript/**/*.test.js"
+
 **Comentários sobre a solução:**
 
 Utilizei todos os atributos privados para maior prática dos métodos getters e setters, por estar utilizando tipos genéricos me aprovetei para usar o for-each e deixando a estrutura de repetição muito mais limpa.

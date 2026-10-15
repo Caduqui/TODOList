@@ -11,6 +11,8 @@
     <h1>Bem vindo ao TODOLIST</h1>
 </header>
 
+<p id="aviso_storage">As alterações não estão sendo salvas neste navegador.</p>
+
 <main>
     <section class="cards_container">
 
@@ -30,6 +32,23 @@
             <h1>DONE</h1>
         </div>
     </section>
+
+    <div id="acao_massa">
+        <span id="contador_selecao">0 selecionadas</span>
+
+        <label for="acao_massa_status">Mover para:</label>
+
+        <select id="acao_massa_status">
+            <option value="BACKLOG">BACKLOG</option>
+            <option value="TODO">TODO</option>
+            <option value="DOING">DOING</option>
+            <option value="DONE" selected>DONE</option>
+        </select>
+
+        <button type="button" id="executarAcaoMassa" disabled>Executar</button>
+    </div>
+
+    <p id="mensagem_acao_massa" role="status"></p>
 
     <!-- referencia: <a href="https://www.flaticon.com/free-icons/pencil" title="pencil icons">Pencil icons created by Magnific - Flaticon</a> -->
     <!-- referencia: <a href="https://www.flaticon.com/free-icons/trash-can" title="trash can icons">Trash can icons created by Magnific - Flaticon</a>-->
@@ -87,6 +106,9 @@
 
 </footer>
 
+<script src="ArmazenamentoTarefas.js"></script>
+<script src="SelecaoTarefas.js"></script>
+<script src="MudancaStatusEmMassa.js"></script>
 <script src="main.js"></script>
 </body>
 </html>

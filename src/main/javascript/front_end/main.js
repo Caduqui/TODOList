@@ -2,10 +2,38 @@ const criarCardForm = document.getElementById("criarCardForm");
 const buttoncriarCard = document.getElementById("buttonCriarCard");
 const alarmeForm = document.getElementById("alarmeForm");
 const alarmeContainer = document.getElementById("alarme_container")
+const avisoStorage = document.getElementById("aviso_storage");
+const contadorSelecao = document.getElementById("contador_selecao");
+const buttonExecutarAcaoMassa = document.getElementById("executarAcaoMassa");
+const selectAcaoMassaStatus = document.getElementById("acao_massa_status");
+const mensagemAcaoMassa = document.getElementById("mensagem_acao_massa");
+const armazenamento = new ArmazenamentoTarefas(obterStorage());
+const selecao = new SelecaoTarefas();
+const mudancaStatus = new MudancaStatusEmMassa();
 
 let listaTarefas = []
 let edicao = null;
 let tarefaAlarmeSelecionado = null;
+
+function obterStorage() {
+    try {
+        return localStorage;
+    } catch (erro) {
+        // navegador com o local storage bloqueado
+        return null;
+    }
+}
+
+function salvarTarefas() {
+    const salvou = armazenamento.salvar(listaTarefas);
+
+    avisoStorage.style.display = salvou ? "none" : "block";
+}
+
+function atualizarBarraSelecao() {
+    contadorSelecao.textContent = selecao.textoContador();
+    buttonExecutarAcaoMassa.disabled = selecao.quantidade() === 0;
+}
 
 function renderizarTarefas() {
     document.querySelectorAll(".card_itens").forEach(card => card.remove());
@@ -19,6 +47,9 @@ function renderizarTarefas() {
             ul.classList.add("card_itens");
 
             ul.innerHTML = `
+                <li class="card_selecao">
+                    <input type="checkbox" aria-label="Selecionar tarefa" onchange="alternarSelecao(${tarefa.id}, this.checked)" ${selecao.estaSelecionada(tarefa.id) ? "checked" : ""}/>
+                </li>
                 <li><strong>Nome</strong>: ${tarefa.name} </li>
                 <li><strong>Descrição:</strong> ${tarefa.description} </li>
                 <li><strong>Prioridade:</strong> ${tarefa.priority} </li>
@@ -39,29 +70,66 @@ function renderizarTarefas() {
             coluna.appendChild(ul);
         }
     });
+
+    atualizarBarraSelecao();
 }
 
-fetch("tarefas.json").then(response => response.json()).then(tarefas => {
-    listaTarefas = tarefas.map((tarefa, index) => ({
-        id: tarefa.id || Date.now() + index,
-        name: tarefa.name,
-        description: tarefa.description,
-        date: tarefa.date,
-        priority: tarefa.priority,
-        category: tarefa.category,
-        status: tarefa.status || "BACKLOG",
-        alarmes: tarefa.alarmes || []
-    }));
+function carregarSeed() {
+    fetch("tarefas.json").then(response => response.json()).then(tarefas => {
+        listaTarefas = tarefas.map((tarefa, index) => ({
+            id: tarefa.id || Date.now() + index,
+            name: tarefa.name,
+            description: tarefa.description,
+            date: tarefa.date,
+            priority: tarefa.priority,
+            category: tarefa.category,
+            status: tarefa.status || "BACKLOG",
+            alarmes: tarefa.alarmes || []
+        }));
 
+        salvarTarefas();
+        renderizarTarefas();
+        verificarAlarmes();
+
+    }).catch(erro => console.error("Erro ao carregar json: ", erro));
+}
+
+const tarefasSalvas = armazenamento.carregar();
+
+if (tarefasSalvas !== null) {
+    listaTarefas = tarefasSalvas;
     renderizarTarefas();
     verificarAlarmes();
-
-}).catch(erro => console.error("Erro ao carregar json: ", erro));
+} else {
+    // primeira visita ou conteúdo gravado inválido
+    carregarSeed();
+}
 
 window.removerTarefa = function (id) {
     listaTarefas = listaTarefas.filter(tarefa => tarefa.id !== id);
+    selecao.remover(id);
+    salvarTarefas();
     renderizarTarefas();
 };
+
+window.alternarSelecao = function (id, marcada) {
+    selecao.alternar(id, marcada);
+    mensagemAcaoMassa.textContent = "";
+    atualizarBarraSelecao();
+};
+
+buttonExecutarAcaoMassa.addEventListener("click", () => {
+    if (selecao.quantidade() === 0)
+        return;
+
+    const statusDestino = selectAcaoMassaStatus.value;
+    const alteradas = mudancaStatus.aplicar(listaTarefas, selecao.ids(), statusDestino);
+
+    salvarTarefas();
+    selecao.limpar();
+    renderizarTarefas();
+    mensagemAcaoMassa.textContent = mudancaStatus.resumo(alteradas, statusDestino);
+});
 
 window.prepararEdicao = function (id) {
     const tarefa = listaTarefas.find(t => t.id === id);
@@ -96,6 +164,7 @@ window.removerAlarme = function (idAlarme) {
 
     tarefaAlarmeSelecionado.alarmes = tarefaAlarmeSelecionado.alarmes.filter(alarme => alarme.id !== idAlarme);
 
+    salvarTarefas();
     renderizarAlarmes(tarefaAlarmeSelecionado);
 }
 
@@ -118,6 +187,7 @@ alarmeForm.addEventListener("submit", (e) => {
     }
 
     tarefaAlarmeSelecionado.alarmes.push(alarme);
+    salvarTarefas();
     renderizarAlarmes(tarefaAlarmeSelecionado);
     verificarAlarmes();
 });
@@ -185,6 +255,7 @@ function dispararAlarme(tarefa, alarme) {
         return
 
     alarme.disparado = true;
+    salvarTarefas();
 
     const aviso = document.createElement("div");
 
@@ -277,6 +348,7 @@ criarCardForm.addEventListener("submit", (e) => {
         });
     }
 
+    salvarTarefas();
     renderizarTarefas();
     criarCardForm.reset();
     document.querySelector(".criarCard").style.display = "none";

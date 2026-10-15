@@ -134,6 +134,42 @@ button {
     gap: 1rem;
 }
 
+.card_selecao {
+    padding: 2px 5px;
+}
+
+#acao_massa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+}
+
+#executarAcaoMassa:disabled {
+    cursor: not-allowed;
+}
+
+#mensagem_acao_massa {
+    min-height: 1.2rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+}
+
+#aviso_storage {
+    display: none;
+    padding: 10px;
+    background-color: #FFF3CD;
+    border: 1px solid #FFE69C;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+}
+
 .aviso_alarme {
     position: fixed;
     top: 20px;
